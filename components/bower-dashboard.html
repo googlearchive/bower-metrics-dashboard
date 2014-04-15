@@ -1,0 +1,121 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer-ui-card/polymer-ui-card.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<link rel="import" href="ga-dash-lib.html">
+<link rel="import" href="ga-auth.html">
+<link rel="import" href="ga-chart.html">
+<link rel="import" href="ga-input.html">
+
+
+<polymer-element name="bower-dashboard" attributes="list">
+  <template>
+    <link rel="stylesheet" href="bower-dashboard.css">
+    <core-ajax auto url="https://api.github.com/repos/Polymer/polymer/tags" handleAs="json" response="{{polymerTags}}"></core-ajax>
+    <core-toolbar theme="core-dark-theme">
+      <content select="header"></content>
+      <div><b>Start date</b>: <ga-input id="startDate" param="startDate" on-change="{{updateCharts}}"></ga-input></div>
+      <div><b>End date</b>: <ga-input id="endDate" param="endDate" on-change="{{updateCharts}}"></ga-input></div>
+      <div>
+        <b>Repo</b>: <select id="repos" on-change="{{selectRepo}}">
+          <option selected value="">All</option>
+          <option template repeat="{{allRepos}}">{{}}</option>
+        </select>
+      </div>
+      <div>
+        <b>Version</b>: <select id="versions" value="{{selectedPolymerVersion}}">
+          <option selected value="">All</option>
+          <option template repeat="{{polymerVersions}}">{{}}</option>
+        </select>
+      </div>
+      <ga-auth apiKey="AIzaSyBbQWDjmdbQ4aVgTIpDLToGt1HJiO7hyQ0"
+               clientId="1000094486480.apps.googleusercontent.com"></ga-auth>
+    </core-toolbar>
+    <section id="graphs">
+      <template repeat="{{repo in list}}">
+        <polymer-ui-card>
+          <h3><b>{{repo}}</b> <span hidden?="{{!gaResponses[repo].totalPageViews}}">{{gaResponses[repo].totalPageViews}} installs</span></h3>
+          <ga-chart auto ids="ga:75972512" metrics="ga:pageviews"
+                    repo="{{repo}}" cmd="installed" version="{{selectedPolymerVersion}}" response="{{lastResponse}}"></ga-chart>
+        </polymer-ui-card>
+      </template>
+    </section>
+  </template>
+  <script>
+  (function() {
+    function getReposFromURL_() {
+      if (!location.search) {
+        return [];
+      }
+
+      var repoList = [];
+
+      var search = location.search.split('/')[0];
+      var params = search.split('?')[1].split('&');
+      params.forEach(function(param, i) {
+        repoList.push(param);
+      });
+
+      return repoList;
+    }
+  
+    Polymer('bower-dashboard', {
+      lastResponse: null,
+      polymerPackage: null,
+      ready: function() {
+        this.list = getReposFromURL_() || [];
+        this.originalList = [];
+        this.gaResponses = {};
+        this.polymerVersions = [];
+        this.polymerTags = [];
+      },
+      polymerTagsChanged: function() {
+        this.polymerVersions = this.polymerTags.filter(function(v, i) {
+          return v.name[0] != 'v'; // Throw out old version names.
+        }).map(function(v, i) {
+          return v.name;
+        });
+      },
+      listChanged: function() {
+        if (!this.originalList.length) {
+          this.originalList = this.list;
+        }
+        for (var i = 0, repo; repo = this.list[i]; ++i) {
+          this.gaResponses[repo] = {totalPageViews: 0};
+        }
+      },
+      updateCharts: function() {
+        var config = {
+          'query': {
+            'startDate': this.$.startDate.value,
+            'endDate': this.$.endDate.value,
+          }
+        };
+
+        var charts = this.$.graphs.querySelectorAll('ga-chart');
+        for (var i = 0, chart; chart = charts[i]; ++i) {
+          config.query.filters = chart.getFilters();
+          chart.gaQuery.execute(config);
+        }
+      },
+      selectRepo: function(e, detail, sender) {
+        if (!sender.value) {
+          history.pushState({}, null, '/');
+          this.list = this.originalList;
+        } else {
+          history.pushState({}, null, '?' + sender.value);
+          this.list = getReposFromURL_();
+        }
+      },
+      lastResponseChanged: function() {
+        this.gaResponses[this.lastResponse.repo].totalPageViews = this.lastResponse.totalsForAllResults['ga:pageviews'];
+      },
+      selectedPolymerVersionChanged: function() {
+        this.updateCharts();
+      }
+    });
+
+  })();
+  </script>
+</polymer-element>

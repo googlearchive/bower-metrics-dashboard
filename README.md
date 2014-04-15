@@ -1,4 +1,8 @@
-bower-metrics-dashboard
-=======================
+## Polymer Bower Metrics Dashboard
 
-Dashboard of usage metrics from Bower
+
+To deploy, run `grunt` to vulcanize the app.
+
+---
+
+#### data provided by Bower, Insights, and Google Analytics

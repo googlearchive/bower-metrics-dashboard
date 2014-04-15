@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="ga-dash-lib.html">
+
+<polymer-element name="ga-input" attributes="param">
+<template>
+  <style>
+    #input:invalid {
+      border: 3px solid darkred;
+      color: red;
+    }
+  </style>
+  <input type="date" id="input" min="2014-03-11" value="{{value}}" on-change="{{onChange}}" title="Note: metrics are not available before 2014-03-11">
+</template>
+<script>
+Polymer('ga-input', {
+  value: '',
+  ready: function() {
+    if (this.param == 'startDate') {
+      this.value = gadash.util.lastNdays(28); // 4 week ago.
+    } else if (this.param == 'endDate') {
+      this.value = gadash.util.lastNdays(0); // today.
+    }
+  },
+  getQuery: function() {
+    var output = {};
+    if (this.param) {
+      output[this.param] = this.value;
+    }
+    return output;
+  },
+  onChange: function(e, detail, sender) {
+    //TODO: why doesn't the change event bubble outside of the element?
+    this.fire('change', detail);
+  },
+  valueChanged: function() {
+    // Bower stats in Google Analytics begun on 2014-03-11 -> cap startDate.
+    // https://twitter.com/ebidel/status/443533697694699520
+    if (this.param == 'startDate') {
+      if (new Date(this.value) < new Date(this.$.input.min)) {
+        this.value = this.$.input.min;
+      }
+    }
+  }
+});
+</script>
+</polymer-element>

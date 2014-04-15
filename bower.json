@@ -1,0 +1,24 @@
+{
+  "name": "polymer-metrics-dashboard",
+  "version": "0.0.1",
+  "homepage": "https://github.com/PolymerLabs/bower-metrics-dashboard",
+  "authors": [
+    "Eric Bidelman <ebidel@gmail.com>"
+  ],
+  "description": "Dashboard of usage metrics from Bower",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.2.2",
+    "ga-ez-dash": "nickski15/ga-ez-dash",
+    "core-toolbar": "Polymer/core-toolbar#master",
+    "polymer-ui-card": "Polymer/polymer-ui-card#~0.2.2",
+    "core-ajax": "Polymer/core-ajax#~0.2.2"
+  }
+}

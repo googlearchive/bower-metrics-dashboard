@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Polymer metrics - provided by Bower</title>
+  <script src="bower_components/platform/platform.js"></script>
+  <link rel="import" href="components/elements.vulcanize.html">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+    }
+    body {
+      font-family: "Open Sans", san-serif;
+      font-weight: 300;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body unresolved>
+
+<bower-dashboard>
+  <header>
+    <h2><a href="http://polymerlabs.github.io/bower-metrics-dashboard"><img id="logo" src="http://www.polymer-project.org/images/logos/p-logo.svg">Polymer installs</a></h2>
+  </header>
+</bower-dashboard>
+
+<script>
+document.addEventListener('polymer-ready', function(e) {
+  var dash = document.querySelector('bower-dashboard');
+
+  // Set initial list of repos if none were passed in the URL.
+  if (!dash.list.length) {
+    dash.list = [
+      'polymer',
+      'platform',
+      'core-elements',
+      'polymer-elements',
+      'polymer-ui-elements',
+    ];
+  }
+
+  dash.allRepos = [
+  'core-action-icons',
+  'core-ajax',
+  'core-component-page',
+  //'core-component-page-dev',
+  'core-doc-viewer',
+  'core-firebase',
+  'core-icon',
+  'core-iconset',
+  'core-iconset-svg',
+  'core-layout',
+  'core-layout-grid',
+  'core-layout-trbl',
+  'core-localstorage',
+  'core-media-query',
+  'core-meta',
+  'core-range',
+  'core-selection',
+  'core-selector',
+  //'core-tests',
+  //'core-docs
+  'core-theme-aware',
+  'core-overlay',
+  'core-toolbar',
+  'core-menu',
+  'core-icon-button',
+  'core-input',
+  'core-item',
+  'core-collapse',
+  'core-pages',
+  'core-header-panel',
+  'core-drawer-panel',
+  'core-transition',
+  // 'Animation',
+  // 'Bootstrap',
+  'CustomElements',
+  // 'ElementCataloger',
+  'HTMLImports',
+  'MutationObservers',
+  'NodeBind',
+  'PointerEvents',
+  'PointerGestures',
+  // 'Promises',
+  // 'Raphael.js',
+  'ShadowDOM',
+  'TemplateBinding',
+  // 'URL',
+  // 'WeakMap',
+  // 'ace-element',
+  // 'apps',
+  // 'arrange-game',
+  // 'book-search',
+  // 'chart-js',
+  // 'code-mirror',
+  // 'component-manager',
+  // 'contacts',
+  // 'cool-clock',
+  // 'demos',
+  // 'designer-elements',
+  // 'element-catalog',
+  // 'flatiron-director',
+  // 'font-roboto2',
+  // 'g-kratu',
+  // 'gallery',
+  // 'google-map',
+  // 'humane-js',
+  // 'js-beautify',
+  // 'labs',
+  // 'libphonenumber.js',
+  // 'marked-js',
+  // 'memory-game',
+  // 'more-elements',
+  // 'observe-js',
+  // 'pdf-js',
+  // 'pica',
+  // 'pixi-js',
+  // 'platform',
+  'platform-dev',
+  // 'platform-user',
+  // 'playground',
+  // 'polymer-ajax',
+  // 'polymer-anchor-point',
+  // 'polymer-animation',
+  // 'polymer-collapse',
+  // 'polymer-cookie',
+  // 'polymer-dev',
+  // 'polymer-doc-viewer',
+  // 'polymer-docs',
+  // 'polymer-elements',
+  // 'polymer-expressions',
+  // 'polymer-file',
+  // 'polymer-flex-layout',
+  // 'polymer-google-jsapi',
+  // 'polymer-grid-layout',
+  // 'polymer-home-page',
+  // 'polymer-home-page-dev',
+  // 'polymer-jsonp',
+  // 'polymer-key-helper',
+  // 'polymer-layout',
+  // 'polymer-list',
+  // 'polymer-localstorage',
+  // 'polymer-media-query',
+  // 'polymer-meta',
+  // 'polymer-mock-data',
+  // 'polymer-overlay',
+  // 'polymer-page',
+  // 'polymer-project',
+  // 'polymer-scrub',
+  // 'polymer-sectioned-list',
+  // 'polymer-selection',
+  // 'polymer-selector',
+  // 'polymer-shared-lib',
+  // 'polymer-signals',
+  // 'polymer-stock',
+  // 'polymer-ui-accordion',
+  // 'polymer-ui-action-icons',
+  // 'polymer-ui-animated-pages',
+  // 'polymer-ui-arrow',
+  // 'polymer-ui-base',
+  // 'polymer-ui-breadcrumbs',
+  // 'polymer-ui-card',
+  // 'polymer-ui-clock',
+  // 'polymer-ui-collapsible',
+  // 'polymer-ui-dark-theme',
+  // 'polymer-ui-dropdown',
+  // 'polymer-ui-dropup',
+  // 'polymer-ui-elements',
+  // 'polymer-ui-field',
+  // 'polymer-ui-icon',
+  // 'polymer-ui-icon-button',
+  // 'polymer-ui-iconset',
+  // 'polymer-ui-light-theme',
+  // 'polymer-ui-line-chart',
+  // 'polymer-ui-menu',
+  // 'polymer-ui-menu-button',
+  // 'polymer-ui-menu-item',
+  // 'polymer-ui-nav-arrow',
+  // 'polymer-ui-overlay',
+  // 'polymer-ui-pages',
+  // 'polymer-ui-ratings',
+  // 'polymer-ui-scaffold',
+  // 'polymer-ui-sidebar',
+  // 'polymer-ui-sidebar-header',
+  // 'polymer-ui-sidebar-menu',
+  // 'polymer-ui-splitter',
+  // 'polymer-ui-stock',
+  // 'polymer-ui-submenu-item',
+  // 'polymer-ui-tabs',
+  // 'polymer-ui-theme-aware',
+  // 'polymer-ui-toggle-button',
+  // 'polymer-ui-toolbar',
+  // 'polymer-ui-weather',
+  // 'polymer-view-source-link',
+  // 'projects',
+  // 'sandbox',
+  // 'shuttle',
+  // 'slideshow',
+  // 'smoothie-chart',
+  // 'speech-mic',
+  // 'speech-transcript',
+  // 'three-js',
+  // 'tk-buildbot',
+  // 'todomvc',
+  // 'toolbar-extension',
+  // 'toolkit-ui',
+  // 'tools',
+  // 'tools-private',
+  // 'topcoat',
+  // 'typeahead-input',
+  // 'untitled',
+  // 'vulcanize',
+  // 'webcomponents',
+  // 'wu-weather',
+  // 'x-binding',
+  // 'x-designable',
+  // 'x-designer',
+  // 'x-dom-serializer',
+  // 'x-editors',
+  // 'x-file-document',
+  // 'x-inspector',
+  // 'x-live-edit',
+  // 'x-meta',
+  // 'x-output',
+  // 'x-palette',
+  // 'x-property-inspector',
+  // 'x-tags',
+  // 'x-tags-elements',
+  // 'x-tree',
+  // 'youtube',
+  // 'yt-search',
+  // 'yt-search-video',
+  // 'yt-video',
+  ].sort();
+
+});
+</script>
+</body>
+</html>

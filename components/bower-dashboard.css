@@ -1,0 +1,123 @@
+:host {
+  display: block;
+}
+#graphs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 64px;
+}
+h1, h2, h3, h4 {
+  font-weight: inherit;
+  margin: 0;
+}
+polyfill-next-selector { content: ':host header h2'; }
+::content header h2 {
+  display: flex;
+  align-items: center;
+  font-weight: inherit;
+  font-family: inherit;
+  margin: 0;
+  color: currentcolor;
+}
+polyfill-next-selector { content: ':host header a'; }
+::content header a {
+  color: currentcolor;
+  text-decoration: none;;
+}
+polyfill-next-selector { content: ':host header'; }
+::content header {
+  margin-right: 30px;
+}
+polyfill-next-selector { content: ':host header #logo'; }
+::content header #logo {
+  margin-right: 5px;
+  width: 30px;
+  height: 21px;
+  height: auto;
+  vertical-align: middle;
+}
+polymer-ui-card {
+  padding: 30px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
+ga-chart {
+  min-width: 450px;
+  min-height: 300px;
+}
+b {
+  font-weight: 600;
+}
+h3 {
+  margin: 0;
+  display: flex;
+}
+h3 b {
+  flex: 1;
+}
+ga-input /deep/ input[type="date"] {
+  border: none;
+  border-radius: 3px;
+  font: inherit;
+  width: 150px;
+  width: 120px;
+  box-sizing: border-box;
+  outline: none;
+  padding: 0 5px;
+}
+ga-input /deep/ input::-webkit-clear-button,
+ga-input /deep/ input::-webkit-inner-spin-button {
+  display: none;
+}
+core-toolbar {
+  font: inherit;
+  /*position: sticky;*/
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+}
+core-toolbar.core-dark-theme {
+  background-color: black;
+}
+core-toolbar > div {
+  margin-right: 10px;
+}
+ga-auth {
+  flex: 1;
+  text-align: right;
+}
+select {
+  width: 100px;
+  font: inherit;
+}
+:host /deep/ button {
+  display: inline-block;
+  -webkit-transition: box-shadow 0.2s, background 0.2s;
+  transition: box-shadow 0.2s, background 0.2s;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  padding: 14px 14px 12px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  outline: none;
+  white-space: nowrap;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+  font-weight: normal;
+  background: #fafafa;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.0980392) 0px 1px 2px 0px;
+}
+:host /deep/ button:hover {
+  text-decoration: none;
+  background: #fff;
+  box-shadow: 0px 4px 10px 0 rgba(0,0,0,0.1), 0px 2px 10px 0px rgba(0,0,0,0.1);
+}
