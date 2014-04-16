@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GA Component Demo</title>
+  <script src="bower_components/platform/platform.js"></script>
+  <link rel="import" href="components/all.html">
+</head>
+<body unresolved>
+
+<h2>This is a simple GA Component Demo</h2>
+
+<ga-auth
+  apiKey="AIzaSyAPusS7gzp0bTla1ogGW_hJOwamaBwVT5Q"
+  clientId="821751250764.apps.googleusercontent.com"></ga-auth>
+
+<hr>
+
+<ga-dashboard>
+
+  <ga-profile-select></ga-profile-select>
+  <hr>
+  <p>Start Date: <ga-input type="date" param="startDate"></ga-input></p>
+  <p>End Date: <ga-input type="date" param="endDate"></ga-input></p>
+  <hr>
+  <ga-button type="execute">Draw Charts</ga-button><br>
+  <hr>
+
+  <h3>Visits & Pageviews Over Time</h3>
+  <ga-chart id="myChart1"
+      type="line"
+      metrics="ga:visits ga:pageviews"></ga-chart>
+
+  <h3>Total Visits & Pageviews</h3>
+  <ga-chart id="myChart2"
+      metrics="ga:visits ga:pageviews"></ga-chart>
+
+  <h3>Visits & Pageviews by Source</h3>
+  <ga-chart id="myChart3"
+      metrics="ga:visits ga:pageviews"
+      dimensions="ga:source ga:medium"
+      sort="-ga:visits"></ga-chart>
+
+</ga-dashboard>
+
+<script>
+
+/*
+
+function renderGraph() {
+  document.getElementById('myChart1').gaQuery.execute();
+  document.getElementById('myChart2').gaQuery.execute();
+  document.getElementById('myChart3').gaQuery.execute();
+}
+
+
+document.addEventListener('WebComponentsReady', function(e) {
+  console.dir(document.getElementById('comp1'));
+  //document.getElementById('comp1').execute();
+});
+
+*/
+</script>
+
+
+</body>
+</html>

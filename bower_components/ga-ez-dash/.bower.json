@@ -1,0 +1,13 @@
+{
+  "name": "ga-ez-dash",
+  "homepage": "https://github.com/nickski15/ga-ez-dash",
+  "_release": "9353586807",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "93535868070bd8a358e99fc030c5924754ab1b6d"
+  },
+  "_source": "git://github.com/nickski15/ga-ez-dash.git",
+  "_target": "*",
+  "_originalSource": "nickski15/ga-ez-dash"
+}
