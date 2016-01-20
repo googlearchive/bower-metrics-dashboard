@@ -1,3 +1,12 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/polymer-ui-card/polymer-ui-card.html">
 <link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
@@ -37,7 +46,7 @@
         <polymer-ui-card>
           <h3><b>{{repo}}</b> <span hidden?="{{!gaResponses[repo].totalPageViews}}">{{gaResponses[repo].totalPageViews}} installs</span></h3>
           <ga-chart auto ids="ga:75972512" metrics="ga:pageviews"
-                    repo="{{repo}}" cmd="installed" version="{{selectedPolymerVersion}}" response="{{lastResponse}}"></ga-chart>
+                    repo="{{repo}}" cmd="install" version="{{selectedPolymerVersion}}" response="{{lastResponse}}"></ga-chart>
         </polymer-ui-card>
       </template>
     </section>
@@ -51,15 +60,17 @@
 
       var repoList = [];
 
-      var search = location.search.split('/')[0];
-      var params = search.split('?')[1].split('&');
-      params.forEach(function(param, i) {
-        repoList.push(param);
-      });
+      // var search = location.search.split('/')[0];
+      // var params = search.split('?')[1].split('&');
+      // params.forEach(function(param, i) {
+      //   repoList.push(param);
+      // });
+
+      repoList.push(location.search.slice(1));
 
       return repoList;
     }
-  
+
     Polymer('bower-dashboard', {
       lastResponse: null,
       polymerPackage: null,
