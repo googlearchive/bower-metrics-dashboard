@@ -79,10 +79,18 @@ Polymer('ga-chart', {
     return config;
   },
   getFilters: function() {
-    var filters = ['ga:pagePathLevel1=~/' + this.cmd,
-                   'ga:pagePathLevel2=~/' + this.repo + '/'].join(';');
+    // var filters = ['ga:pagePathLevel1=~/' + this.cmd,
+    //                'ga:pagePathLevel2=/' + this.repo + '/'].join(';');
+    // if (this.version) {
+    //   filters += ';ga:pagePathLevel3=~/' + this.version;
+    // }
+    // var filters = ['ga:pagePathLevel1=~/' + this.cmd,
+                   // 'ga:pagePathLevel2=~/PolymerElements/',
+                   // 'ga:pagePathLevel3=~/' + this.repo + '/'].join(';');
+console.log(this.repo)
+    var filters = 'ga:pagePath=~/' + this.cmd + '/' + this.repo + '/';
     if (this.version) {
-      filters += ';ga:pagePathLevel3=~/' + this.version;
+      filters += this.version;
     }
     return filters;
   }

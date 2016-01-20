@@ -37,7 +37,7 @@
         <polymer-ui-card>
           <h3><b>{{repo}}</b> <span hidden?="{{!gaResponses[repo].totalPageViews}}">{{gaResponses[repo].totalPageViews}} installs</span></h3>
           <ga-chart auto ids="ga:75972512" metrics="ga:pageviews"
-                    repo="{{repo}}" cmd="installed" version="{{selectedPolymerVersion}}" response="{{lastResponse}}"></ga-chart>
+                    repo="{{repo}}" cmd="install" version="{{selectedPolymerVersion}}" response="{{lastResponse}}"></ga-chart>
         </polymer-ui-card>
       </template>
     </section>
@@ -51,15 +51,17 @@
 
       var repoList = [];
 
-      var search = location.search.split('/')[0];
-      var params = search.split('?')[1].split('&');
-      params.forEach(function(param, i) {
-        repoList.push(param);
-      });
+      // var search = location.search.split('/')[0];
+      // var params = search.split('?')[1].split('&');
+      // params.forEach(function(param, i) {
+      //   repoList.push(param);
+      // });
+
+      repoList.push(location.search.slice(1));
 
       return repoList;
     }
-  
+
     Polymer('bower-dashboard', {
       lastResponse: null,
       polymerPackage: null,
